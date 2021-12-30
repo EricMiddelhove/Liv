@@ -1,23 +1,26 @@
-from flask import Flask
+from flask import Flask, Response
 
 import os
+import json
 
 app = Flask(__name__)
 
+def readDataFromConfig(key: str):
+	with open('./config.json') as json_file:
+		data = json.load(json_file)
 
-@app.route("/startpc")
-def start_pc():
-	print("Waking PC")
-	stream = os.popen("wakeonlan 2C:F0:5D:05:C0:A9")
-	stream = os.popen("wakeonlan 68:5b:35:c6:b3:19")
-	return "OK"
+		return data[key]
 
+macaddressestowake = readDataFromConfig("macaddressestowake")
 
+@app.route("/wakepcs")
+def wakepcs():
 
+	for address in macaddressestowake:
+		stream = os.popen("wakeonlan " + address)
+		print("Waking " + address)
+
+	return Response(response="OK", status=200)
 
 if __name__ == "__main__":
 	app.run("0.0.0.0")
-
-
-
-
