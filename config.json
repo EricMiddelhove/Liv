@@ -1,5 +1,12 @@
 {
     "macaddressestowake": [
-        "2C:F0:5D:05:C0:A9"
+        {
+            "name": "Erics PC",
+            "address": "2C:F0:5D:05:C0:A9"
+        },
+        {
+            "name": "Erics MacBook Pro 2021",
+            "address": "F8:4D:89:70:BE:FE"
+        }
     ]
 }
